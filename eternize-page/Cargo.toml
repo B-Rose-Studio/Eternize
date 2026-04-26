@@ -1,0 +1,16 @@
+[package]
+name = "eternize-page"
+version = "0.1.0"
+edition = "2024"
+authors = ["Bruno-Camargo-V3ktor <bruno.ferreira.v3ktor@gmail.com>"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+worker = { workspace = true }
+worker-macros = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+base64 = "0.22.1"
+askama = "0.15.6"

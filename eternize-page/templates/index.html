@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_meta_title }} - EternizeWeb</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+    theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            'brand-dark': '#1A1C23',
+            'brand-accent': '#B76E79',
+            'brand-champagne': '#F7E7CE',
+          }
+        }
+      }
+    }
+  </script>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+    rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body class="bg-brand-dark text-gray-200 font-sans antialiased overflow-x-hidden">
+
+  {% for section_type in user_ordered_sections %}
+    {% match section_type %}
+            
+      {% when SectionType::Hero %} <hero></hero>
+                
+      {% when SectionType::Album %} <album></album>
+                
+      {% when SectionType::Gala %} <gala></gala>
+                
+      {% when SectionType::Timeline %} <timeline></timeline>
+                
+      {% when SectionType::Glass %} <glass></glass>
+                
+      {% when SectionType::Vault %} <vault></vault>
+                        
+    {% endmatch %}
+  {% endfor %}
+
+</body>
+
+</html>

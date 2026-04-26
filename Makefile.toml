@@ -1,0 +1,14 @@
+[tasks.format]
+command = "cargo"
+args = ["fmt", "--", "-a"]
+
+[tasks.wrangler-dep]
+command = "npm"
+args = ["i", "-g", "wrangler@latest"]
+
+[tasks.eternize-page-dev]
+cwd = "./eternize-page/"
+dependencies = ["wrangler-dep"]
+command = "npx"
+args = ["wrangler", "dev"]
+
