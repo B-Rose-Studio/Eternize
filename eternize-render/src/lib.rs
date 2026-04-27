@@ -1,7 +1,7 @@
 use askama::Template;
 
 mod pages;
-//mod sections;
+mod sections;
 
 pub fn render_customize_page() -> String {
     let page = pages::customize::CustomizePage {
