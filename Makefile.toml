@@ -6,7 +6,7 @@ args = ["fmt", "--", "-a"]
 command = "npm"
 args = ["i", "-g", "wrangler@latest"]
 
-[tasks.eternize-page-dev]
+[tasks.run-dev]
 cwd = "./eternize-page/"
 dependencies = ["wrangler-dep"]
 command = "npx"

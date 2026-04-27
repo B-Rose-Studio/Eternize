@@ -7,5 +7,5 @@ command = "cargo install -q \"worker-build@^0.8\" && worker-build --release"
 
 [[d1_databases]]
 binding = "ETERNIZE-DB"
-databse_name = "eternize-db"
+database_name = "eternize-db"
 database_id = "61807ca7-0820-4d0c-862f-0521aa47f150"
