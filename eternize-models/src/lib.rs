@@ -1,9 +1,4 @@
-pub mod album;
 pub mod customize_page;
-pub mod gift;
-pub mod glass;
-pub mod hero;
 pub mod section;
 pub mod signature;
-pub mod timeline;
 pub mod user;

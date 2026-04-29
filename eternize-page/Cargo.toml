@@ -7,8 +7,11 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
-eternize-render = { workspace = true }
-serde = { workspace = true }
-serde_json = { workspace = true }
-worker = { workspace = true }
-worker-macros = { workspace = true }
+chrono.workspace = true
+eternize-models.workspace = true
+eternize-render.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+uuid.workspace = true
+worker.workspace = true
+worker-macros.workspace = true

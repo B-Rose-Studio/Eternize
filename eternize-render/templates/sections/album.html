@@ -1,47 +1,71 @@
+{% if let Some(album) = album %}
 <section class="py-24 px-4 bg-[#1e2029] relative overflow-hidden">
-  <div class="absolute inset-0 opacity-10 pointer-events-none">
-    <div class="w-full h-[1px] bg-white absolute top-1/4 -rotate-2"></div>
-    <div class="w-full h-[1px] bg-white absolute top-3/4 rotate-3"></div>
-  </div>
-
-  <div class="max-w-5xl mx-auto">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl font-serif text-white flex items-center justify-center gap-3">
-        <i class="ph ph-bookmark-simple text-brand-accent text-4xl"></i>
-        {{ model.section_title }}
-      </h2>
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+        <div class="w-full h-[1px] bg-white absolute top-1/4 -rotate-2"></div>
+        <div class="w-full h-[1px] bg-white absolute top-3/4 rotate-3"></div>
     </div>
 
-    <div class="flex flex-wrap justify-center gap-8 md:gap-16">
-
-      <div
-        class="w-64 bg-gray-800 p-4 pb-12 rounded-sm shadow-xl -rotate-3 hover:rotate-0 transition duration-300 border border-gray-700">
-        <div class="w-full h-56 bg-gray-900 overflow-hidden">
-          <img src="{{ model.photo_one_url }}" alt="Memory" class="w-full h-full object-cover">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <h2
+                class="text-3xl font-serif text-white flex items-center justify-center gap-3"
+            >
+                <i class="ph ph-bookmark-simple text-brand-accent text-4xl"></i>
+                {{ album.section_title }}
+            </h2>
         </div>
-        <p class="text-center mt-4 text-gray-400 font-serif text-sm">{{ model.photo_one_caption }}</p>
-      </div>
 
-      <div
-        class="w-64 bg-gray-800 p-4 pb-12 rounded-sm shadow-xl rotate-6 mt-12 hover:rotate-0 transition duration-300 border border-brand-accent/30">
-        <div class="relative w-full h-56 bg-gray-900 overflow-hidden">
-          <img src="{{ model.photo_two_url }}" alt="Memory" class="w-full h-full object-cover">
-          <span
-            class="absolute top-4 right-4 bg-black/80 text-white text-xs px-3 py-1 rounded-full border border-white/20 backdrop-blur-md">
-            {{ model.photo_two_badge_text }}
-          </span>
+        <div class="flex flex-wrap justify-center gap-8 md:gap-16">
+            <div
+                class="w-64 bg-gray-800 p-4 pb-12 rounded-sm shadow-xl -rotate-3 hover:rotate-0 transition duration-300 border border-gray-700"
+            >
+                <div class="w-full h-56 bg-gray-900 overflow-hidden">
+                    <img
+                        src="{{ album.photo_one_url }}"
+                        alt="Memory"
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+                <p class="text-center mt-4 text-gray-400 font-serif text-sm">
+                    {{ album.photo_one_caption }}
+                </p>
+            </div>
+
+            <div
+                class="w-64 bg-gray-800 p-4 pb-12 rounded-sm shadow-xl rotate-6 mt-12 hover:rotate-0 transition duration-300 border border-brand-accent/30"
+            >
+                <div class="relative w-full h-56 bg-gray-900 overflow-hidden">
+                    <img
+                        src="{{ album.photo_two_url }}"
+                        alt="Memory"
+                        class="w-full h-full object-cover"
+                    />
+                    <span
+                        class="absolute top-4 right-4 bg-black/80 text-white text-xs px-3 py-1 rounded-full border border-white/20 backdrop-blur-md"
+                    >
+                        {{ album.photo_two_badge_text }}
+                    </span>
+                </div>
+                <p class="text-center mt-4 text-gray-400 font-serif text-sm">
+                    {{ album.photo_two_caption }}
+                </p>
+            </div>
+
+            <div
+                class="w-64 bg-gray-800 p-4 pb-12 rounded-sm shadow-xl -rotate-6 mt-4 hover:rotate-0 transition duration-300 border border-gray-700"
+            >
+                <div class="w-full h-56 bg-gray-900 overflow-hidden">
+                    <img
+                        src="{{ album.photo_three_url }}"
+                        alt="Memory"
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+                <p class="text-center mt-4 text-gray-400 font-serif text-sm">
+                    {{ album.photo_three_caption }}
+                </p>
+            </div>
         </div>
-        <p class="text-center mt-4 text-gray-400 font-serif text-sm">{{ model.photo_two_caption }}</p>
-      </div>
-
-      <div
-        class="w-64 bg-gray-800 p-4 pb-12 rounded-sm shadow-xl -rotate-6 mt-4 hover:rotate-0 transition duration-300 border border-gray-700">
-        <div class="w-full h-56 bg-gray-900 overflow-hidden">
-          <img src="{{ model.photo_three_url }}" alt="Memory" class="w-full h-full object-cover">
-        </div>
-        <p class="text-center mt-4 text-gray-400 font-serif text-sm">{{ model.photo_three_caption }}</p>
-      </div>
-
     </div>
-  </div>
 </section>
+{% endif %}

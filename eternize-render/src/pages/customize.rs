@@ -1,3 +1,4 @@
+use crate::sections::{album::Album, gift::Gift, glass::Glass, hero::Hero, timeline::Timeline};
 use askama::Template;
 use eternize_models::{customize_page::CustomizePage, section::Section};
 use serde::{Deserialize, Serialize};
@@ -20,84 +21,73 @@ pub enum SectionType {
 #[derive(Template, Debug, Clone)]
 #[template(path = "index.html")]
 pub struct CustomizePageTemplate<'a> {
-    pub page_meta_title: &'a str,
-    pub user_ordered_sections: Vec<SectionType>,
+    page_meta_title: &'a str,
+    user_ordered_sections: Vec<SectionType>,
+
+    hero: Option<Hero>,
+    album: Option<Album>,
+    glass: Option<Glass>,
+    gift: Option<Gift>,
+    timeline: Option<Timeline>,
 }
 
 impl<'a> CustomizePageTemplate<'a> {
-    pub fn render(
-        params: CustomizePage,
-        mut sections: Vec<(Section, HashMap<String, String>)>,
-    ) -> String {
-        sections.sort_by(|a, b| a.0.order.cmp(&b.0.order));
-
-        let sections_types: Vec<SectionType> = sections
-            .iter()
-            .map(|section| SectionType::from_str(&section.0.name).unwrap())
-            .collect();
-
-        let page = CustomizePageTemplate {
-            page_meta_title: &params.title,
-            user_ordered_sections: sections_types,
-        };
-
-        let mut html = page.render().unwrap();
-
-        for section in sections {
-            match SectionType::from_str(&section.0.name).unwrap() {
-                SectionType::Hero => {
-                    html = html.replacen("<Section></Section>", "Hero", 1);
-                }
-
-                SectionType::Album => {
-                    html = html.replacen("<Section></Section>", "Album", 1);
-                }
-
-                SectionType::Timeline => {
-                    html = html.replacen("<Section></Section>", "Timeline", 1);
-                }
-
-                SectionType::Glass => {
-                    html = html.replacen("<Section></Section>", "Glass", 1);
-                }
-
-                SectionType::Gift => {
-                    html = html.replacen("<Section></Section>", "Gift", 1);
-                }
-            }
-        }
-
-        html
-    }
-
-    pub fn test() -> String {
-        let sections = vec![SectionType::Hero, SectionType::Glass, SectionType::Gift];
-
-        let page = CustomizePageTemplate {
-            page_meta_title: "Teste",
+    fn new(
+        title: &'a str,
+        sections: Vec<SectionType>,
+        propertys: &HashMap<String, String>,
+    ) -> Self {
+        let mut object = Self {
+            page_meta_title: title,
             user_ordered_sections: sections.clone(),
-        };
 
-        let mut html = page.render().unwrap();
+            album: None,
+            gift: None,
+            glass: None,
+            hero: None,
+            timeline: None,
+        };
 
         for section in sections {
             match section {
                 SectionType::Hero => {
-                    html = html.replacen("<Section></Section>", "Hero", 1);
+                    object.hero = propertys.try_into().ok();
                 }
 
                 SectionType::Glass => {
-                    html = html.replacen("<Section></Section>", "Glass", 1);
+                    object.glass = propertys.try_into().ok();
+                }
+
+                SectionType::Timeline => {
+                    object.timeline = propertys.try_into().ok();
+                }
+
+                SectionType::Album => {
+                    object.album = propertys.try_into().ok();
                 }
 
                 SectionType::Gift => {
-                    html = html.replacen("<Section></Section>", "Gift", 1);
+                    object.gift = propertys.try_into().ok();
                 }
-
-                _ => {}
             }
         }
 
-        html
+        object
+    }
+
+    pub fn render(
+        params: CustomizePage,
+        mut sections: Vec<Section>,
+        propertys: HashMap<String, String>,
+    ) -> String {
+        sections.sort_by(|a, b| a.order.cmp(&b.order));
+
+        let sections_types: Vec<SectionType> = sections
+            .iter()
+            .map(|section| SectionType::from_str(&section.name).unwrap())
+            .collect();
+
+        let page = CustomizePageTemplate::new(&params.title, sections_types, &propertys);
+        page.render().unwrap()
     }
 }

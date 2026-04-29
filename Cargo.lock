@@ -179,9 +179,12 @@ dependencies = [
 name = "eternize-page"
 version = "0.1.0"
 dependencies = [
+ "chrono",
+ "eternize-models",
  "eternize-render",
  "serde",
  "serde_json",
+ "uuid",
  "worker",
  "worker-macros",
 ]
@@ -193,6 +196,7 @@ dependencies = [
  "askama",
  "eternize-models",
  "serde",
+ "serde_json",
  "strum 0.28.0",
  "strum_macros 0.28.0",
 ]

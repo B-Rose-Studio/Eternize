@@ -34,22 +34,23 @@
     <body
         class="bg-brand-dark text-gray-200 font-sans antialiased overflow-x-hidden"
     >
-        {% for section_type in user_ordered_sections %} {% match section_type %}
-        {% when SectionType::Hero %}
-        <Section></Section>
+        {% for section_type in user_ordered_sections %}
+            {% match section_type %}
+                {% when SectionType::Hero %}
+                    {% include "sections/hero.html" %}
 
-        {% when SectionType::Album %}
-        <Section></Section>
+                {% when SectionType::Album %}
+                    {% include "sections/album.html" %}
 
-        {% when SectionType::Timeline %}
-        <Section></Section>
+                {% when SectionType::Timeline %}
+                    {% include "sections/timeline.html" %}
 
-        {% when SectionType::Glass %}
-        <Section></Section>
+                {% when SectionType::Glass %}
+                    {% include "sections/glass.html" %}
 
-        {% when SectionType::Gift %}
-        <Section></Section>
-
-        {% endmatch %} {% endfor %}
+                {% when SectionType::Gift %}
+                    {% include "sections/gift.html" %}
+            {% endmatch %}
+        {% endfor %}
     </body>
 </html>

@@ -1,3 +1,4 @@
+{% if let Some(gift) = gift %}
 <section
     class="min-h-[80vh] flex flex-col items-center justify-center py-24 px-4 bg-[#111216] relative"
 >
@@ -7,7 +8,7 @@
             class="space-y-8 transition-all duration-500"
         >
             <h2 class="text-2xl text-gray-400 font-light">
-                {{ model.teaser_text }}
+                {{ gift.teaser_text }}
             </h2>
 
             <button
@@ -22,7 +23,7 @@
             <p
                 class="text-sm font-semibold tracking-[0.2em] uppercase text-white border border-white/20 px-6 py-2 rounded-full inline-block"
             >
-                {{ model.interaction_instruction }}
+                {{ gift.interaction_instruction }}
             </p>
         </div>
 
@@ -31,23 +32,23 @@
             class="hidden opacity-0 space-y-6 transition-all duration-700 transform translate-y-8"
         >
             <h2 class="text-3xl font-serif text-white">
-                {{ model.reveal_title }}
+                {{ gift.reveal_title }}
             </h2>
             <div
                 class="p-8 bg-gray-800/50 border border-brand-accent/50 rounded-xl backdrop-blur-sm"
             >
                 <p class="text-xl text-brand-champagne mb-4">
-                    {{ model.surprise_name }}
+                    {{ gift.surprise_name }}
                 </p>
                 <p class="text-gray-400 text-sm mb-6">
-                    {{ model.surprise_message }}
+                    {{ gift.surprise_message }}
                 </p>
                 <a
-                    href="{{ model.surprise_action_url }}"
+                    href="{{ gift.surprise_action_url }}"
                     target="_blank"
                     class="inline-block bg-brand-accent text-white px-8 py-3 rounded text-sm font-bold uppercase tracking-wider hover:bg-opacity-80 transition"
                 >
-                    {{ model.surprise_button_label }}
+                    {{ gift.surprise_button_label }}
                 </a>
             </div>
         </div>
@@ -55,3 +56,4 @@
 
     <script></script>
 </section>
+{% endif %}
