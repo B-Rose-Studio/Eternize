@@ -4,10 +4,10 @@ use uuid::Uuid;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct CustomizePage {
-    id: Uuid,
-    name: String,
-    title: String,
-    purchased_in: DateTime<Utc>,
-    renewed_in: DateTime<Utc>,
-    active: bool,
+    pub id: Uuid,
+    pub name: String,
+    pub title: String,
+    pub purchased_in: DateTime<Utc>,
+    pub renewed_in: DateTime<Utc>,
+    pub active: bool,
 }

@@ -5,5 +5,7 @@ edition = "2024"
 
 [dependencies]
 askama = "0.15"
-serde = { workspace = true }
 eternize-models = { workspace = true }
+serde = { workspace = true }
+strum = "0.28.0"
+strum_macros = "0.28.0"

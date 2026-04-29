@@ -3,7 +3,7 @@ use uuid::Uuid;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Section {
-    id: Uuid,
-    name: String,
-    order: u8,
+    pub id: Uuid,
+    pub name: String,
+    pub order: u8,
 }

@@ -1,5 +1,5 @@
 INSERT OR IGNORE INTO signatures (id, name, price, max_sections)
-VALUES ('7b1897e0-466d-4b82-9654-2c0692557e84', 'Basic', 25.00, 5);
+VALUES ('7b1897e0-466d-4b82-9654-2c0692557e84', 'Basic', 25.00, 4);
 
 -- (password: admin123) Bcrypt with 12 rounds
 INSERT OR IGNORE INTO users (id, type, email, password, first_name, last_name, active)

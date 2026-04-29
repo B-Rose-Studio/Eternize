@@ -10,12 +10,12 @@ pub enum UserType {
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct User {
-    id: Uuid,
-    email: String,
-    password: String,
-    first_name: String,
-    last_name: String,
-    phone: String,
-    active: bool,
-    birthdate: DateTime<Utc>,
+    pub id: Uuid,
+    pub email: String,
+    pub password: String,
+    pub first_name: String,
+    pub last_name: String,
+    pub phone: String,
+    pub active: bool,
+    pub birthdate: DateTime<Utc>,
 }
