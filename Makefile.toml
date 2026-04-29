@@ -20,3 +20,9 @@ cwd = "./eternize-page/"
 dependencies = ["wrangler-dep", "run-local-db"]
 command = "npx"
 args = ["wrangler", "dev"]
+
+[tasks.deploy]
+cwd = "./eternize-page/"
+dependencies = ["wrangler-dep"]
+command = "npx"
+args = ["wrangler", "deploy"]
