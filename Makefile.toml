@@ -6,9 +6,17 @@ args = ["fmt", "--", "-a"]
 command = "npm"
 args = ["i", "-g", "wrangler@latest"]
 
-[tasks.run-dev]
+[tasks.run-local-db]
 cwd = "./eternize-page/"
 dependencies = ["wrangler-dep"]
+script = """
+FULL_QUERY=$(cat ../migrations/*.sql | sed 's/--.*//g' | tr '\n' ' ' | sed 's/  */ /g')
+
+npx wrangler d1 execute eternize-db --local --command "$FULL_QUERY"
+"""
+
+[tasks.run-dev]
+cwd = "./eternize-page/"
+dependencies = ["wrangler-dep", "run-local-db"]
 command = "npx"
 args = ["wrangler", "dev"]
-
