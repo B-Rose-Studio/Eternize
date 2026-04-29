@@ -1,11 +1,13 @@
 [workspace]
-resolver = '2'
-members = ["eternize-models","eternize-page", "eternize-render"]
+resolver = "2"
+members = ["eternize-models", "eternize-page", "eternize-render"]
 
 [workspace.dependencies]
-worker = { version = "0.8", features = ['d1'] }
-worker-macros = { version = "0.8" }
-serde = { version = "1.0.228", features = ["derive"]}
-serde_json = "1.0.149"
-eternize-render = { path = "./eternize-render/" }
+chrono = { version = "0.4.44", features = ["serde"] }
 eternize-models = { path = "./eternize-models/" }
+eternize-render = { path = "./eternize-render/" }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+uuid = { version = "1.23.1", features = ["js", "serde", "v4"] }
+worker = { version = "0.8", features = ["d1"] }
+worker-macros = { version = "0.8" }
