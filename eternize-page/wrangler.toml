@@ -9,3 +9,7 @@ command = "cargo install -q \"worker-build@^0.8\" && worker-build --release"
 binding = "ETERNIZE-DB"
 database_name = "eternize-db"
 database_id = "61807ca7-0820-4d0c-862f-0521aa47f150"
+
+[[r2_buckets]]
+binding = "ETERNIZE-STORAGE"
+bucket_name = "eternize-buckter"
