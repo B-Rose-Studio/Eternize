@@ -1,6 +1,11 @@
 [workspace]
 resolver = "2"
-members = ["eternize-models", "eternize-page", "eternize-render"]
+members = [
+  "eternize-models",
+  "eternize-page",
+  "eternize-render",
+  "eternize-repository"
+]
 
 [workspace.dependencies]
 chrono = { version = "0.4.44", features = ["serde"] }
