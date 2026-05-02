@@ -5,6 +5,15 @@ compatibility_date = "2026-04-25"
 [build]
 command = "cargo install -q \"worker-build@^0.8\" && worker-build --release"
 
+[observability]
+[observability.logs]
+enabled = true
+invocation_logs = true
+
+[[routes]]
+pattern = "eternize.bluerosestudio.com.br"
+custom_domain = true
+
 [[d1_databases]]
 binding = "ETERNIZE-DB"
 database_name = "eternize-db"

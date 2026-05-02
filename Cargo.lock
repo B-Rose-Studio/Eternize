@@ -182,6 +182,7 @@ dependencies = [
  "chrono",
  "eternize-models",
  "eternize-render",
+ "eternize-repository",
  "serde",
  "serde_json",
  "uuid",
@@ -208,6 +209,7 @@ dependencies = [
  "eternize-models",
  "serde",
  "serde_json",
+ "uuid",
  "worker",
  "worker-macros",
 ]
