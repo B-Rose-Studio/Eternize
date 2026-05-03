@@ -13,4 +13,7 @@ pub struct CustomizePage {
 
     #[serde(deserialize_with = "bool_from_int")]
     pub active: bool,
+
+    pub user_id: Uuid,
+    pub signature_id: Uuid,
 }

@@ -17,6 +17,8 @@ async fn fetch(_req: Request, env: Env, _ctx: Context) -> Result<Response> {
         title: "Teste".into(),
         purchased_in: Utc::now(),
         renewed_in: Utc::now(),
+        user_id: Uuid::new_v4(),
+        signature_id: Uuid::new_v4(),
     };
 
     let sections = vec![

@@ -1,3 +1,4 @@
+use crate::ReadMethod;
 use crate::Repository;
 use eternize_models::customize_page::CustomizePage;
 use worker::D1Database;
@@ -16,18 +17,73 @@ impl<'a> Repository for PageD1Repositiry<'a> {
     }
 
     async fn save(&self, entity: Self::Entity) -> D1Result<Self::Entity> {
-        todo!()
+        let query = "INSERT INTO customize_pages (id, name, title, purchased_in, renewed_in, active, user_id, signature_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        let active_int = if entity.active { 1 } else { 0 };
+
+        let statement = self.db.prepare(query).bind(&[
+            entity.id.to_string().into(),
+            entity.name.clone().into(),
+            entity.title.clone().into(),
+            entity.purchased_in.to_rfc3339().into(),
+            entity.renewed_in.to_rfc3339().into(),
+            active_int.into(),
+            entity.user_id.to_string().into(),
+            entity.signature_id.to_string().into(),
+        ])?;
+        statement.run().await?;
+        Ok(entity)
     }
 
-    async fn read(&self, method: crate::ReadMethod) -> D1Result<Vec<Self::Entity>> {
-        todo!()
+    async fn read(&self, method: ReadMethod) -> D1Result<Vec<Self::Entity>> {
+        match method {
+            ReadMethod::All => {
+                let statement = self.db.prepare("SELECT * FROM customize_pages");
+                statement.all().await?.results::<Self::Entity>()
+            }
+            ReadMethod::ById(id) => {
+                let statement = self
+                    .db
+                    .prepare("SELECT * FROM customize_pages WHERE id = ?")
+                    .bind(&[id.to_string().into()])?;
+                statement.all().await?.results::<Self::Entity>()
+            }
+            ReadMethod::Page { numbers, page } => {
+                let offset = (page.saturating_sub(1)) * numbers;
+                let statement = self
+                    .db
+                    .prepare("SELECT * FROM customize_pages LIMIT ? OFFSET ?")
+                    .bind(&[(numbers as u32).into(), (offset as u32).into()])?;
+                statement.all().await?.results::<Self::Entity>()
+            }
+        }
     }
 
     async fn update(&self, entity: Self::Entity) -> D1Result<Self::Entity> {
-        todo!()
+        let query = "UPDATE customize_pages SET name = ?, title = ?, purchased_in = ?, renewed_in = ?, active = ?, user_id = ?, signature_id = ? WHERE id = ?";
+
+        let active_int = if entity.active { 1 } else { 0 };
+
+        let statement = self.db.prepare(query).bind(&[
+            entity.name.clone().into(),
+            entity.title.clone().into(),
+            entity.purchased_in.to_rfc3339().into(),
+            entity.renewed_in.to_rfc3339().into(),
+            active_int.into(),
+            entity.user_id.to_string().into(),
+            entity.signature_id.to_string().into(),
+            entity.id.to_string().into(),
+        ])?;
+        statement.run().await?;
+        Ok(entity)
     }
 
     async fn delete(&self, entity: Self::Entity) -> D1Result<()> {
-        todo!()
+        let statement = self
+            .db
+            .prepare("DELETE FROM customize_pages WHERE id = ?")
+            .bind(&[entity.id.to_string().into()])?;
+        statement.run().await?;
+        Ok(())
     }
 }
