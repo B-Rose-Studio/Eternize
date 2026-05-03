@@ -1,3 +1,4 @@
+use crate::utils::bool_from_int;
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -9,5 +10,7 @@ pub struct CustomizePage {
     pub title: String,
     pub purchased_in: DateTime<Utc>,
     pub renewed_in: DateTime<Utc>,
+
+    #[serde(deserialize_with = "bool_from_int")]
     pub active: bool,
 }

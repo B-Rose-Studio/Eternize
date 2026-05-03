@@ -1,18 +1,14 @@
 use chrono::Utc;
-use eternize_models::{
-    customize_page::CustomizePage,
-    section::Section,
-    user::{User, UserType},
-};
+use eternize_models::{customize_page::CustomizePage, section::Section};
 use eternize_render::CustomizePageTemplate;
-use eternize_repository::{DB, ReadMethod, Repository, d1::UserD1Repository};
+use eternize_repository::DB;
 use std::collections::HashMap;
 use uuid::Uuid;
 use worker::*;
 
 #[event(fetch)]
 async fn fetch(_req: Request, env: Env, _ctx: Context) -> Result<Response> {
-    let db = DB::new(&env, "ETERNIZE-DB").unwrap();
+    let _db = DB::new(&env, "ETERNIZE-DB").unwrap();
 
     let params = CustomizePage {
         id: Uuid::new_v4(),

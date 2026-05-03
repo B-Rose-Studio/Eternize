@@ -19,7 +19,7 @@ pub enum SectionType {
 }
 
 #[derive(Template, Debug, Clone)]
-#[template(path = "index.html")]
+#[template(path = "customize/index.html")]
 pub struct CustomizePageTemplate<'a> {
     page_meta_title: &'a str,
     user_ordered_sections: Vec<SectionType>,
