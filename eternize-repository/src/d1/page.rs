@@ -1,7 +1,11 @@
+use std::collections::HashMap;
+
 use crate::PageRepository;
 use crate::ReadMethod;
 use crate::Repository;
 use eternize_models::customize_page::CustomizePage;
+use serde::Deserialize;
+use uuid::Uuid;
 use worker::D1Database;
 use worker::Result as D1Result;
 
@@ -89,4 +93,31 @@ impl<'a> Repository for PageD1Repositiry<'a> {
     }
 }
 
-impl<'a> PageRepository for PageD1Repositiry<'a> {}
+impl<'a> PageRepository for PageD1Repositiry<'a> {
+    async fn get_all_properties(&self, page_id: Uuid) -> D1Result<HashMap<String, String>> {
+        let query = "
+                    SELECT p.name, p.value
+                    FROM propertys p
+                    INNER JOIN sections s ON p.section_id = s.id
+                    WHERE s.page_id = ?
+                ";
+
+        let statement = self.db.prepare(query).bind(&[page_id.to_string().into()])?;
+
+        #[derive(Deserialize)]
+        struct RawProperty {
+            name: String,
+            value: Option<String>,
+        }
+
+        let raw_properties: Vec<RawProperty> = statement.all().await?.results()?;
+
+        let mut page_props_map: HashMap<String, String> = HashMap::new();
+
+        for prop in raw_properties {
+            page_props_map.insert(prop.name, prop.value.unwrap_or_default());
+        }
+
+        Ok(page_props_map)
+    }
+}
