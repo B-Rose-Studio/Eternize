@@ -50,6 +50,7 @@ pub trait SignatureRepository: Repository<Entity = Signature> {}
 #[allow(async_fn_in_trait)]
 pub trait PageRepository: Repository<Entity = CustomizePage> {
     async fn get_all_properties(&self, page_id: Uuid) -> WorkerResult<HashMap<String, String>>;
+    async fn get_sections(&self, page_id: Uuid) -> WorkerResult<Vec<Section>>;
 }
 
 #[allow(async_fn_in_trait)]

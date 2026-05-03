@@ -4,6 +4,7 @@ use crate::PageRepository;
 use crate::ReadMethod;
 use crate::Repository;
 use eternize_models::customize_page::CustomizePage;
+use eternize_models::section::Section;
 use serde::Deserialize;
 use uuid::Uuid;
 use worker::D1Database;
@@ -119,5 +120,14 @@ impl<'a> PageRepository for PageD1Repositiry<'a> {
         }
 
         Ok(page_props_map)
+    }
+
+    async fn get_sections(&self, page_id: Uuid) -> D1Result<Vec<Section>> {
+        let query = "SELECT * FROM sections WHERE page_id = ? ORDER BY \"order\" ASC";
+        let statement = self.db.prepare(query).bind(&[page_id.to_string().into()])?;
+
+        let sections: Vec<Section> = statement.all().await?.results()?;
+
+        Ok(sections)
     }
 }
