@@ -1,8 +1,11 @@
 pub mod d1;
 
+use eternize_models::{
+    customize_page::CustomizePage, section::Section, signature::Signature, user::User,
+};
 use std::ops::Deref;
 use uuid::Uuid;
-use worker::Result as D1Result;
+use worker::Result as WorkerResult;
 
 pub enum ReadMethod {
     All,
@@ -20,11 +23,16 @@ pub trait Repository {
 
     fn new(db: Self::DB) -> Self;
 
-    async fn save(&self, entity: Self::Entity) -> D1Result<Self::Entity>;
-    async fn read(&self, method: ReadMethod) -> D1Result<Vec<Self::Entity>>;
-    async fn update(&self, entity: Self::Entity) -> D1Result<Self::Entity>;
-    async fn delete(&self, entity: Self::Entity) -> D1Result<()>;
+    async fn save(&self, entity: Self::Entity) -> WorkerResult<Self::Entity>;
+    async fn read(&self, method: ReadMethod) -> WorkerResult<Vec<Self::Entity>>;
+    async fn update(&self, entity: Self::Entity) -> WorkerResult<Self::Entity>;
+    async fn delete(&self, entity: Self::Entity) -> WorkerResult<()>;
 }
+
+pub trait UserRepository: Repository<Entity = User> {}
+pub trait SignatureRepository: Repository<Entity = Signature> {}
+pub trait SectionRepository: Repository<Entity = Section> {}
+pub trait PageRepository: Repository<Entity = CustomizePage> {}
 
 impl<T> Deref for DB<T> {
     type Target = T;

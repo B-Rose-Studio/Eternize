@@ -1,5 +1,6 @@
 use crate::ReadMethod;
 use crate::Repository;
+use crate::UserRepository;
 use eternize_models::user::User;
 use eternize_models::user::UserType;
 use worker::D1Database;
@@ -107,3 +108,5 @@ impl<'a> Repository for UserD1Repository<'a> {
         Ok(())
     }
 }
+
+impl<'a> UserRepository for UserD1Repository<'a> {}
