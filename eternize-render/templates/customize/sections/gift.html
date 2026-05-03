@@ -8,7 +8,7 @@
             class="space-y-8 transition-all duration-500"
         >
             <h2 class="text-2xl text-gray-400 font-light">
-                {{ gift.teaser_text }}
+                {{ gift.gift_teaser_text }}
             </h2>
 
             <button
@@ -23,7 +23,7 @@
             <p
                 class="text-sm font-semibold tracking-[0.2em] uppercase text-white border border-white/20 px-6 py-2 rounded-full inline-block"
             >
-                {{ gift.interaction_instruction }}
+                {{ gift.gift_interaction_instruction }}
             </p>
         </div>
 
@@ -32,23 +32,23 @@
             class="hidden opacity-0 space-y-6 transition-all duration-700 transform translate-y-8"
         >
             <h2 class="text-3xl font-serif text-white">
-                {{ gift.reveal_title }}
+                {{ gift.gift_reveal_title }}
             </h2>
             <div
                 class="p-8 bg-gray-800/50 border border-brand-accent/50 rounded-xl backdrop-blur-sm"
             >
                 <p class="text-xl text-brand-champagne mb-4">
-                    {{ gift.surprise_name }}
+                    {{ gift.gift_surprise_name }}
                 </p>
                 <p class="text-gray-400 text-sm mb-6">
-                    {{ gift.surprise_message }}
+                    {{ gift.gift_surprise_message }}
                 </p>
                 <a
-                    href="{{ gift.surprise_action_url }}"
+                    href="{{ gift.gift_surprise_action_url }}"
                     target="_blank"
                     class="inline-block bg-brand-accent text-white px-8 py-3 rounded text-sm font-bold uppercase tracking-wider hover:bg-opacity-80 transition"
                 >
-                    {{ gift.surprise_button_label }}
+                    {{ gift.gift_surprise_button_label }}
                 </a>
             </div>
         </div>

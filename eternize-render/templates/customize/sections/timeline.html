@@ -2,7 +2,7 @@
 <section class="py-24 px-4 bg-[#14151a]">
     <div class="max-w-4xl mx-auto">
         <h2 class="text-center text-3xl font-serif text-white mb-16">
-            {{ timeline.section_title }}
+            {{ timeline.timeline_section_title }}
         </h2>
 
         <div class="relative space-y-16">
@@ -10,7 +10,7 @@
                 class="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-gray-700 -translate-x-1/2"
             ></div>
 
-            {% for event in timeline.events %}
+            {% for event in timeline.timeline_events %}
             <div
                 class="relative flex flex-col md:flex-row items-center justify-between w-full"
             >

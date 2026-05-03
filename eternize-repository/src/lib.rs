@@ -17,6 +17,20 @@ pub struct DB<T> {
     connection: T,
 }
 
+impl<T> Deref for DB<T> {
+    type Target = T;
+
+    fn deref(&self) -> &Self::Target {
+        &self.connection
+    }
+}
+
+impl<T> DB<T> {
+    pub fn as_ref(&self) -> &T {
+        &self.connection
+    }
+}
+
 #[allow(async_fn_in_trait)]
 pub trait Repository {
     type DB;
@@ -55,12 +69,4 @@ pub trait SectionRepository: Repository<Entity = Section> {
     -> WorkerResult<()>;
 
     async fn delete_property(&self, prop_id: Uuid) -> WorkerResult<()>;
-}
-
-impl<T> Deref for DB<T> {
-    type Target = T;
-
-    fn deref(&self) -> &Self::Target {
-        &self.connection
-    }
 }
