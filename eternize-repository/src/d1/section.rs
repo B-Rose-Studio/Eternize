@@ -1,4 +1,6 @@
+use crate::ReadMethod;
 use crate::Repository;
+use crate::SectionRepository;
 use eternize_models::section::Section;
 use worker::D1Database;
 use worker::Result as D1Result;
@@ -16,18 +18,61 @@ impl<'a> Repository for SectionD1Repositiry<'a> {
     }
 
     async fn save(&self, entity: Self::Entity) -> D1Result<Self::Entity> {
-        todo!()
+        let query = "INSERT INTO sections (id, name, \"order\", page_id) VALUES (?, ?, ?, ?)";
+        let statement = self.db.prepare(query).bind(&[
+            entity.id.to_string().into(),
+            entity.name.clone().into(),
+            entity.order.into(),
+            entity.page_id.to_string().into(),
+        ])?;
+        statement.run().await?;
+        Ok(entity)
     }
 
-    async fn read(&self, method: crate::ReadMethod) -> D1Result<Vec<Self::Entity>> {
-        todo!()
+    async fn read(&self, method: ReadMethod) -> D1Result<Vec<Self::Entity>> {
+        match method {
+            ReadMethod::All => {
+                let statement = self.db.prepare("SELECT * FROM sections");
+                statement.all().await?.results::<Self::Entity>()
+            }
+            ReadMethod::ById(id) => {
+                let statement = self
+                    .db
+                    .prepare("SELECT * FROM sections WHERE id = ?")
+                    .bind(&[id.to_string().into()])?;
+                statement.all().await?.results::<Self::Entity>()
+            }
+            ReadMethod::Page { numbers, page } => {
+                let offset = (page.saturating_sub(1)) * numbers;
+                let statement = self
+                    .db
+                    .prepare("SELECT * FROM sections LIMIT ? OFFSET ?")
+                    .bind(&[(numbers as u32).into(), (offset as u32).into()])?;
+                statement.all().await?.results::<Self::Entity>()
+            }
+        }
     }
 
     async fn update(&self, entity: Self::Entity) -> D1Result<Self::Entity> {
-        todo!()
+        let query = "UPDATE sections SET name = ?, \"order\" = ?, page_id = ? WHERE id = ?";
+        let statement = self.db.prepare(query).bind(&[
+            entity.name.clone().into(),
+            entity.order.into(),
+            entity.page_id.to_string().into(),
+            entity.id.to_string().into(),
+        ])?;
+        statement.run().await?;
+        Ok(entity)
     }
 
     async fn delete(&self, entity: Self::Entity) -> D1Result<()> {
-        todo!()
+        let statement = self
+            .db
+            .prepare("DELETE FROM sections WHERE id = ?")
+            .bind(&[entity.id.to_string().into()])?;
+        statement.run().await?;
+        Ok(())
     }
 }
+
+impl<'a> SectionRepository for SectionD1Repositiry<'a> {}

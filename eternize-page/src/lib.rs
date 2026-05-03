@@ -10,8 +10,9 @@ use worker::*;
 async fn fetch(_req: Request, env: Env, _ctx: Context) -> Result<Response> {
     let _db = DB::new(&env, "ETERNIZE-DB").unwrap();
 
+    let page_id = Uuid::new_v4();
     let params = CustomizePage {
-        id: Uuid::new_v4(),
+        id: page_id.clone(),
         active: true,
         name: "Teste".into(),
         title: "Teste".into(),
@@ -26,26 +27,31 @@ async fn fetch(_req: Request, env: Env, _ctx: Context) -> Result<Response> {
             id: Uuid::new_v4(),
             name: "Hero".into(),
             order: 0,
+            page_id: page_id.clone(),
         },
         Section {
             id: Uuid::new_v4(),
             name: "Glass".into(),
             order: 1,
+            page_id: page_id.clone(),
         },
         Section {
             id: Uuid::new_v4(),
             name: "Album".into(),
             order: 3,
+            page_id: page_id.clone(),
         },
         Section {
             id: Uuid::new_v4(),
             name: "Timeline".into(),
             order: 2,
+            page_id: page_id.clone(),
         },
         Section {
             id: Uuid::new_v4(),
             name: "Gift".into(),
             order: 4,
+            page_id: page_id.clone(),
         },
     ];
 

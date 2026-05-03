@@ -6,4 +6,5 @@ pub struct Section {
     pub id: Uuid,
     pub name: String,
     pub order: u8,
+    pub page_id: Uuid,
 }

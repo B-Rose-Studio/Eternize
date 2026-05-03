@@ -1,3 +1,4 @@
+use crate::PageRepository;
 use crate::ReadMethod;
 use crate::Repository;
 use eternize_models::customize_page::CustomizePage;
@@ -87,3 +88,5 @@ impl<'a> Repository for PageD1Repositiry<'a> {
         Ok(())
     }
 }
+
+impl<'a> PageRepository for PageD1Repositiry<'a> {}

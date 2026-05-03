@@ -17,6 +17,7 @@ pub struct DB<T> {
     connection: T,
 }
 
+#[allow(async_fn_in_trait)]
 pub trait Repository {
     type DB;
     type Entity;
