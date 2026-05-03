@@ -3,7 +3,7 @@ pub mod d1;
 use eternize_models::{
     customize_page::CustomizePage, section::Section, signature::Signature, user::User,
 };
-use std::ops::Deref;
+use std::{collections::HashMap, ops::Deref};
 use uuid::Uuid;
 use worker::Result as WorkerResult;
 
@@ -32,8 +32,30 @@ pub trait Repository {
 
 pub trait UserRepository: Repository<Entity = User> {}
 pub trait SignatureRepository: Repository<Entity = Signature> {}
-pub trait SectionRepository: Repository<Entity = Section> {}
 pub trait PageRepository: Repository<Entity = CustomizePage> {}
+
+#[allow(async_fn_in_trait)]
+pub trait SectionRepository: Repository<Entity = Section> {
+    async fn add_property(
+        &self,
+        section_id: Uuid,
+        name: String,
+        value: String,
+    ) -> WorkerResult<Uuid>;
+
+    async fn get_properties(&self, section_id: Uuid) -> WorkerResult<HashMap<String, String>>;
+
+    async fn add_properties(
+        &self,
+        section_id: Uuid,
+        properties: HashMap<String, String>,
+    ) -> WorkerResult<()>;
+
+    async fn update_property(&self, prop_id: Uuid, name: String, value: String)
+    -> WorkerResult<()>;
+
+    async fn delete_property(&self, prop_id: Uuid) -> WorkerResult<()>;
+}
 
 impl<T> Deref for DB<T> {
     type Target = T;
