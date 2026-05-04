@@ -11,6 +11,7 @@ chrono.workspace = true
 eternize-models.workspace = true
 eternize-render.workspace = true
 eternize-repository.workspace = true
+eternize-services.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 uuid.workspace = true

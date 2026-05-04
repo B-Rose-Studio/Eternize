@@ -1,62 +1,37 @@
-use chrono::Utc;
-use eternize_models::{customize_page::CustomizePage, section::Section};
-use eternize_render::CustomizePageTemplate;
-use eternize_repository::DB;
-use std::collections::HashMap;
-use uuid::Uuid;
+use eternize_render::{CustomizePageTemplate, MainPageTemplate, NotFoundTemplate};
+use eternize_repository::{DB, Repository, d1::PageD1Repositiry};
+use eternize_services::database;
 use worker::*;
 
 #[event(fetch)]
-async fn fetch(_req: Request, env: Env, _ctx: Context) -> Result<Response> {
-    let _db = DB::new(&env, "ETERNIZE-DB").unwrap();
+async fn fetch(req: Request, env: Env, _ctx: Context) -> Result<Response> {
+    let router = Router::new();
 
-    let page_id = Uuid::new_v4();
-    let params = CustomizePage {
-        id: page_id.clone(),
-        active: true,
-        name: "Teste".into(),
-        title: "Teste".into(),
-        purchased_in: Utc::now(),
-        renewed_in: Utc::now(),
-        user_id: Uuid::new_v4(),
-        signature_id: Uuid::new_v4(),
-    };
+    router
+        // Main Page
+        .get_async("/", |_, _| async move {
+            return Response::from_html(MainPageTemplate::render());
+        })
+        // Customize Page
+        .get_async("/:page_id", |_, ctx| async move {
+            let db = DB::new(&ctx.env, "ETERNIZE-DB").unwrap();
 
-    let sections = vec![
-        Section {
-            id: Uuid::new_v4(),
-            name: "Hero".into(),
-            order: 0,
-            page_id: page_id.clone(),
-        },
-        Section {
-            id: Uuid::new_v4(),
-            name: "Glass".into(),
-            order: 1,
-            page_id: page_id.clone(),
-        },
-        Section {
-            id: Uuid::new_v4(),
-            name: "Album".into(),
-            order: 3,
-            page_id: page_id.clone(),
-        },
-        Section {
-            id: Uuid::new_v4(),
-            name: "Timeline".into(),
-            order: 2,
-            page_id: page_id.clone(),
-        },
-        Section {
-            id: Uuid::new_v4(),
-            name: "Gift".into(),
-            order: 4,
-            page_id: page_id.clone(),
-        },
-    ];
+            let page_id = ctx.param("page_id").unwrap().to_string();
+            let page_repo = PageD1Repositiry::new(db.as_ref());
 
-    let propertys = HashMap::new();
+            let (page, sections, properties) =
+                database::PageServices::get_page_in_chain(page_repo, page_id).await;
 
-    let html = CustomizePageTemplate::render(params, sections, propertys);
-    Response::from_html(html)
+            if let Some(page) = page {
+                if page.active {
+                    return Response::from_html(CustomizePageTemplate::render(
+                        page, sections, properties,
+                    ));
+                }
+            }
+
+            return Response::from_html(NotFoundTemplate::render());
+        })
+        .run(req, env)
+        .await
 }
