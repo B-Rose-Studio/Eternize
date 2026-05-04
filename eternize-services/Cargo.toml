@@ -1,0 +1,11 @@
+[package]
+name = "eternize-services"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+eternize-models.workspace = true
+eternize-repository.workspace = true
+futures.workspace = true
+short-uuid = "0.2.1"
+uuid.workspace = true
