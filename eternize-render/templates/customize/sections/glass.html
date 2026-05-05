@@ -27,14 +27,19 @@
         </div>
 
         <div
-            class="col-span-1 md:col-span-3 aspect-[21/9] rounded-2xl bg-[#1A1C23]/40 backdrop-blur-lg border border-white/10 p-8 shadow-2xl flex flex-col items-center justify-center hover:bg-[#1A1C23]/60 transition"
+            class="col-span-1 md:col-span-3 aspect-[21/9] rounded-2xl bg-[#1A1C23]/40 backdrop-blur-lg border border-white/10 p-2 shadow-2xl flex flex-col items-center justify-center transition overflow-hidden relative group"
         >
-            <i
-                class="ph ph-play-circle text-5xl text-brand-accent mb-4 cursor-pointer hover:scale-110 transition"
-            ></i>
-            <span class="text-gray-300 text-sm tracking-widest uppercase"
-                >{{ glass.glass_card_three_cta_text }}</span
+            <video
+                controls
+                preload="metadata"
+                class="w-full h-full object-cover rounded-xl shadow-inner"
             >
+                <source
+                    src="{{ glass.glass_card_three_video_url }}"
+                    type="video/mp4"
+                />
+                Seu navegador não suporta a reprodução deste vídeo.
+            </video>
         </div>
     </div>
 </section>
