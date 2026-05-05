@@ -3,10 +3,7 @@
     class="min-h-[80vh] flex flex-col items-center justify-center py-24 px-4 bg-[#111216] relative"
 >
     <div class="text-center z-10 max-w-lg w-full">
-        <div
-            id="presente-fechado"
-            class="space-y-8 transition-all duration-500"
-        >
+        <div id="gift-closed" class="space-y-8 transition-all duration-500">
             <h2 class="text-2xl text-gray-400 font-light">
                 {{ gift.gift_teaser_text }}
             </h2>
@@ -28,7 +25,7 @@
         </div>
 
         <div
-            id="presente-aberto"
+            id="gift-open"
             class="hidden opacity-0 space-y-6 transition-all duration-700 transform translate-y-8"
         >
             <h2 class="text-3xl font-serif text-white">
@@ -54,6 +51,22 @@
         </div>
     </div>
 
-    <script></script>
+    <script>
+        function openGift() {
+            const closed = document.getElementById("gift-closed");
+            const open = document.getElementById("gift-open");
+
+            closed.classList.add("opacity-0", "scale-95");
+
+            setTimeout(() => {
+                closed.classList.add("hidden");
+                open.classList.remove("hidden");
+
+                setTimeout(() => {
+                    open.classList.remove("opacity-0", "translate-y-8");
+                }, 50);
+            }, 300);
+        }
+    </script>
 </section>
 {% endif %}
