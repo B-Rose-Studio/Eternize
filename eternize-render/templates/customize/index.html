@@ -16,7 +16,7 @@
                         },
                         colors: {
                             "brand-dark": "#1A1C23",
-                            "brand-accent": "#B76E79",
+                            "brand-accent": "#3B82F6",
                             "brand-champagne": "#F7E7CE",
                         },
                     },
@@ -34,23 +34,12 @@
     <body
         class="bg-brand-dark text-gray-200 font-sans antialiased overflow-x-hidden"
     >
-        {% for section_type in user_ordered_sections %}
-            {% match section_type %}
-                {% when SectionType::Hero %}
-                    {% include "sections/hero.html" %}
-
-                {% when SectionType::Album %}
-                    {% include "sections/album.html" %}
-
-                {% when SectionType::Timeline %}
-                    {% include "sections/timeline.html" %}
-
-                {% when SectionType::Glass %}
-                    {% include "sections/glass.html" %}
-
-                {% when SectionType::Gift %}
-                    {% include "sections/gift.html" %}
-            {% endmatch %}
+        {% for section_type in user_ordered_sections %} {% match section_type %}
+        {% when SectionType::Hero %} {% include "sections/hero.html" %} {% when
+        SectionType::Album %} {% include "sections/album.html" %} {% when
+        SectionType::Timeline %} {% include "sections/timeline.html" %} {% when
+        SectionType::Glass %} {% include "sections/glass.html" %} {% when
+        SectionType::Gift %} {% include "sections/gift.html" %} {% endmatch %}
         {% endfor %}
     </body>
 </html>

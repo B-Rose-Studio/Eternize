@@ -7,5 +7,5 @@ edition = "2024"
 eternize-models.workspace = true
 eternize-repository.workspace = true
 futures.workspace = true
-short-uuid = "0.2.1"
+short-uuid.workspace = true
 uuid.workspace = true

@@ -186,6 +186,7 @@ dependencies = [
  "eternize-services",
  "serde",
  "serde_json",
+ "short-uuid",
  "uuid",
  "worker",
  "worker-macros",
