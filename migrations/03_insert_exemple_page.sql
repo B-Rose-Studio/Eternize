@@ -1,9 +1,11 @@
 -- PAGE
-INSERT OR IGNORE INTO customize_pages (id, name, title, purchased_in, renewed_in, active, user_id, signature_id)
+INSERT OR IGNORE INTO customize_pages (id, name, title, theme, background_music, purchased_in, renewed_in, active, user_id, signature_id)
 VALUES (
     '965a3af6-128b-4a7d-883b-d139843c3034',
     'example-page',
     'Example',
+    'MidnightBlue',
+    '',
     '2026-05-03T12:00:00Z',
     '2026-05-03T12:00:00Z',
     1,

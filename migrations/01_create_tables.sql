@@ -21,9 +21,11 @@ CREATE TABLE IF NOT EXISTS customize_pages (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     title TEXT NOT NULL,
+    theme TEXT NOT NULL,
     purchased_in TEXT NOT NULL,
     renewed_in TEXT,
     active INTEGER NOT NULL DEFAULT 1,
+    background_music TEXT NOT NULL,
     user_id TEXT NOT NULL, --FK
     signature_id TEXT NOT NULL,  --FK
 

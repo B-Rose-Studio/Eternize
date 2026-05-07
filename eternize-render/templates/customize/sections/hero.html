@@ -1,6 +1,5 @@
 {% if let Some(hero) = hero %}
 <style>
-    /* Animação para a foto e o badge */
     @keyframes heroReveal {
         from {
             opacity: 0;
@@ -12,7 +11,6 @@
         }
     }
 
-    /* Animação de Ciclo de Fontes (O charme que você pediu) */
     @keyframes fontCycle {
         0%,
         100% {
@@ -48,7 +46,6 @@
         display: inline-block;
     }
 
-    /* Delay individual para cada item do highlight não mudar ao mesmo tempo */
     .highlight-item:nth-child(2) .font-cycler {
         animation-delay: 1.3s;
     }
@@ -86,7 +83,7 @@
             >
                 {{ hero.hero_main_title }}
             </h1>
-            <div class="w-16 h-px bg-brand-accent mx-auto"></div>
+            <div class="w-16 h-px bg-theme-accent mx-auto"></div>
             <p
                 class="text-lg md:text-xl text-gray-400 font-light leading-relaxed"
             >
@@ -100,7 +97,7 @@
             {% for highlight in hero.hero_highlight_items %}
             <div class="highlight-item flex flex-col items-center group">
                 <span
-                    class="text-brand-accent text-[10px] tracking-[0.4em] uppercase mb-3 opacity-50 group-hover:opacity-100 transition-opacity"
+                    class="text-theme-accent text-[10px] tracking-[0.4em] uppercase mb-3 opacity-50 group-hover:opacity-100 transition-opacity"
                 >
                     Essência
                 </span>

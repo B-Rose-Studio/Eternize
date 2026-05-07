@@ -1,6 +1,9 @@
 use crate::sections::{album::Album, gift::Gift, glass::Glass, hero::Hero, timeline::Timeline};
 use askama::Template;
-use eternize_models::{customize_page::CustomizePage, section::Section};
+use eternize_models::{
+    customize_page::{CustomizePage, ThemePage},
+    section::Section,
+};
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, str::FromStr};
 use strum_macros::EnumString;
@@ -23,6 +26,8 @@ pub enum SectionType {
 pub struct CustomizePageTemplate<'a> {
     page_meta_title: &'a str,
     user_ordered_sections: Vec<SectionType>,
+    theme: ThemePage,
+    background_music_url: &'a str,
 
     hero: Option<Hero>,
     album: Option<Album>,
@@ -33,13 +38,15 @@ pub struct CustomizePageTemplate<'a> {
 
 impl<'a> CustomizePageTemplate<'a> {
     fn new(
-        title: &'a str,
+        page: &'a CustomizePage,
         sections: Vec<SectionType>,
         propertys: &HashMap<String, String>,
     ) -> Self {
         let mut object = Self {
-            page_meta_title: title,
+            page_meta_title: page.title.as_str(),
             user_ordered_sections: sections.clone(),
+            theme: page.theme.clone(),
+            background_music_url: page.background_music.as_str(),
 
             album: None,
             gift: None,
@@ -87,7 +94,7 @@ impl<'a> CustomizePageTemplate<'a> {
             .map(|section| SectionType::from_str(&section.name).unwrap())
             .collect();
 
-        let page = CustomizePageTemplate::new(&params.title, sections_types, &propertys);
+        let page = CustomizePageTemplate::new(&params, sections_types, &propertys);
         page.render().unwrap()
     }
 }

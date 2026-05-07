@@ -1,5 +1,5 @@
 {% if let Some(timeline) = timeline %}
-<section class="py-24 px-4 bg-[#14151a] relative overflow-hidden">
+<section class="py-24 px-4 bg-theme-section-dark relative overflow-hidden">
     <div class="max-w-5xl mx-auto">
         <div class="text-center mb-20">
             <h2
@@ -8,13 +8,13 @@
                 {{ timeline.timeline_section_title }}
             </h2>
             <div
-                class="w-24 h-1 bg-brand-accent mx-auto mt-6 rounded-full opacity-80"
+                class="w-24 h-1 bg-theme-accent mx-auto mt-6 rounded-full opacity-80"
             ></div>
         </div>
 
         <div class="relative">
             <div
-                class="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-gray-700 to-transparent md:-translate-x-1/2"
+                class="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-theme-border to-transparent md:-translate-x-1/2"
             ></div>
 
             {% for event in timeline.timeline_events %}
@@ -22,15 +22,15 @@
                 class="relative w-full mb-16 md:mb-32 last:mb-0 flex flex-col md:flex-row justify-between items-center even:md:flex-row-reverse group"
             >
                 <div
-                    class="absolute left-[28px] md:left-1/2 top-[72px] md:top-1/2 w-4 h-4 rounded-full bg-brand-accent shadow-[0_0_15px_rgba(59,130,246,0.6)] transform -translate-x-1/2 md:-translate-y-1/2 z-10 transition-all duration-500 group-hover:scale-150 group-hover:bg-white border-4 border-[#14151a]"
+                    class="absolute left-[28px] md:left-1/2 top-[72px] md:top-1/2 w-4 h-4 rounded-full bg-theme-accent shadow-[0_0_15px_var(--theme-accent)] transform -translate-x-1/2 md:-translate-y-1/2 z-10 transition-all duration-500 group-hover:scale-150 group-hover:bg-white border-4 border-theme-section-dark"
                 ></div>
 
                 <div class="w-full pl-16 md:pl-0 md:w-[42%] mb-8 md:mb-0">
                     <div
-                        class="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 p-8 rounded-2xl shadow-xl transition-all duration-500 group-hover:border-brand-accent/50 group-hover:bg-gray-800/70 group-hover:-translate-y-1"
+                        class="bg-theme-card/40 backdrop-blur-sm border border-theme-border/50 p-8 rounded-2xl shadow-xl transition-all duration-500 group-hover:border-theme-accent/50 group-hover:bg-theme-card/70 group-hover:-translate-y-1"
                     >
                         <span
-                            class="font-serif text-4xl font-bold text-brand-accent mb-4 block drop-shadow-md"
+                            class="font-serif text-4xl font-bold text-theme-accent mb-4 block drop-shadow-md"
                         >
                             {{ event.year }}
                         </span>
@@ -44,10 +44,10 @@
 
                 <div class="w-full pl-16 md:pl-0 md:w-[42%]">
                     <div
-                        class="relative rounded-2xl overflow-hidden border border-gray-700/50 shadow-lg transition-all duration-700 group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.6)]"
+                        class="relative rounded-2xl overflow-hidden border border-theme-border/50 shadow-lg transition-all duration-700 group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.6)]"
                     >
                         <div
-                            class="absolute inset-0 bg-[#14151a]/20 group-hover:opacity-0 transition-opacity duration-500 z-10 pointer-events-none"
+                            class="absolute inset-0 bg-theme-section-dark/20 group-hover:opacity-0 transition-opacity duration-500 z-10 pointer-events-none"
                         ></div>
                         <img
                             src="{{ event.image_url }}"

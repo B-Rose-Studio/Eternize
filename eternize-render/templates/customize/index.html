@@ -5,6 +5,53 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{{ page_meta_title }} - EternizeWeb</title>
 
+        <style>
+            :root {
+                {% match theme %}
+                    {% when ThemePage::MidnightBlue %}
+                        --theme-base: #1A1C23;
+                        --theme-section-dark: #111216;
+                        --theme-section-light: #1e2029;
+                        --theme-card: #1f2937;
+                        --theme-card-dark: #111827;
+                        --theme-border: #374151;
+                        --theme-accent: #3B82F6;
+                    {% when ThemePage::RoseGold %}
+                        --theme-base: #2B2121;
+                        --theme-section-dark: #1E1616;
+                        --theme-section-light: #332828;
+                        --theme-card: #3D3131;
+                        --theme-card-dark: #241B1B;
+                        --theme-border: #574646;
+                        --theme-accent: #D98B8B;
+                    {% when ThemePage::Emerald %}
+                        --theme-base: #18201C;
+                        --theme-section-dark: #101613;
+                        --theme-section-light: #1D2622;
+                        --theme-card: #27362F;
+                        --theme-card-dark: #151D19;
+                        --theme-border: #364B41;
+                        --theme-accent: #D4AF37;
+                    {% when ThemePage::Obsidian %}
+                        --theme-base: #0A0A0A;
+                        --theme-section-dark: #050505;
+                        --theme-section-light: #121212;
+                        --theme-card: #171717;
+                        --theme-card-dark: #000000;
+                        --theme-border: #262626;
+                        --theme-accent: #F3F4F6;
+                    {% when ThemePage::Burgundy %}
+                        --theme-base: #2A171D;
+                        --theme-section-dark: #1C0F13;
+                        --theme-section-light: #361E25;
+                        --theme-card: #45262F;
+                        --theme-card-dark: #211217;
+                        --theme-border: #5E3541;
+                        --theme-accent: #F7E7CE;
+                {% endmatch %}
+            }
+        </style>
+
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
             tailwind.config = {
@@ -15,8 +62,13 @@
                             serif: ["Playfair Display", "serif"],
                         },
                         colors: {
-                            "brand-dark": "#1A1C23",
-                            "brand-accent": "#3B82F6",
+                            "theme-base": "var(--theme-base)",
+                            "theme-section-dark": "var(--theme-section-dark)",
+                            "theme-section-light": "var(--theme-section-light)",
+                            "theme-card": "var(--theme-card)",
+                            "theme-card-dark": "var(--theme-card-dark)",
+                            "theme-border": "var(--theme-border)",
+                            "theme-accent": "var(--theme-accent)",
                             "brand-champagne": "#F7E7CE",
                         },
                     },
@@ -32,7 +84,7 @@
     </head>
 
     <body
-        class="bg-brand-dark text-gray-200 font-sans antialiased overflow-x-hidden"
+        class="bg-theme-base text-gray-200 font-sans antialiased overflow-x-hidden"
     >
         {% for section_type in user_ordered_sections %} {% match section_type %}
         {% when SectionType::Hero %} {% include "sections/hero.html" %} {% when
@@ -40,6 +92,33 @@
         SectionType::Timeline %} {% include "sections/timeline.html" %} {% when
         SectionType::Glass %} {% include "sections/glass.html" %} {% when
         SectionType::Gift %} {% include "sections/gift.html" %} {% endmatch %}
-        {% endfor %}
+        {% endfor %} {% if !background_music_url.is_empty() %}
+        <audio id="bg-music" loop>
+            <source src="{{ background_music_url }}" type="audio/mpeg" />
+        </audio>
+
+        <script>
+            window.addEventListener("DOMContentLoaded", () => {
+                const audio = document.getElementById("bg-music");
+
+                if (audio) {
+                    audio.volume = 0.05;
+
+                    const playAudio = () => {
+                        audio.play().catch((error) => {
+                            console.log(
+                                "Autoplay bloqueado pelo navegador. Aguardando interação.",
+                            );
+                        });
+                        document.removeEventListener("click", playAudio);
+                        document.removeEventListener("touchstart", playAudio);
+                    };
+
+                    document.addEventListener("click", playAudio);
+                    document.addEventListener("touchstart", playAudio);
+                }
+            });
+        </script>
+        {% endif %}
     </body>
 </html>
