@@ -1,67 +1,86 @@
 {% if let Some(album) = album %}
-<section class="py-24 px-4 bg-[#1e2029] relative overflow-hidden">
+<section class="py-24 px-4 bg-transparent relative overflow-hidden">
     <div class="absolute inset-0 opacity-10 pointer-events-none">
         <div class="w-full h-[1px] bg-white absolute top-1/4 -rotate-2"></div>
         <div class="w-full h-[1px] bg-white absolute top-3/4 rotate-3"></div>
     </div>
 
-    <div class="max-w-5xl mx-auto">
-        <div class="text-center mb-16">
+    <div class="max-w-5xl mx-auto z-10 relative">
+        <div class="text-center mb-16 space-y-4">
             <h2
-                class="text-3xl font-serif text-white flex items-center justify-center gap-3"
+                class="text-3xl md:text-4xl font-serif text-white flex items-center justify-center gap-3"
             >
-                <i class="ph ph-bookmark-simple text-brand-accent text-4xl"></i>
+                <i class="ph ph-bookmark-simple text-brand-accent text-5xl"></i>
                 {{ album.album_section_title }}
             </h2>
+            <p
+                class="text-base text-gray-400 font-light max-w-2xl mx-auto leading-relaxed"
+            >
+                Uma coleção curada dos nossos sorrisos mais radiantes e das
+                memórias que o tempo não apaga.
+            </p>
         </div>
 
         <div class="flex flex-wrap justify-center gap-8 md:gap-16">
             <div
-                class="w-64 bg-gray-800 p-4 pb-12 rounded-sm shadow-xl -rotate-3 hover:rotate-0 transition duration-300 border border-gray-700"
+                class="w-64 bg-gray-800 p-4 pb-12 rounded-sm shadow-xl -rotate-3 hover:rotate-0 hover:scale-105 hover:shadow-2xl transition duration-500 border border-gray-700 group"
             >
-                <div class="w-full h-56 bg-gray-900 overflow-hidden">
+                <div class="overflow-hidden rounded-sm w-full h-56">
                     <img
                         src="{{ album.album_photo_one_url }}"
-                        alt="Memory"
-                        class="w-full h-full object-cover"
+                        alt="{{ album.album_photo_one_caption }}"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                 </div>
-                <p class="text-center mt-4 text-gray-400 font-serif text-sm">
+                <p
+                    class="text-center mt-5 text-gray-400 font-serif text-base leading-snug drop-shadow-sm"
+                >
                     {{ album.album_photo_one_caption }}
                 </p>
             </div>
 
             <div
-                class="w-64 bg-gray-800 p-4 pb-12 rounded-sm shadow-xl rotate-6 mt-12 hover:rotate-0 transition duration-300 border border-brand-accent/30"
+                class="w-64 bg-gray-800 p-4 pb-12 rounded-sm shadow-xl rotate-6 mt-12 hover:rotate-0 hover:scale-105 hover:shadow-2xl transition duration-500 border border-brand-accent/30 group"
             >
-                <div class="relative w-full h-56 bg-gray-900 overflow-hidden">
+                <div class="relative overflow-hidden rounded-sm w-full h-56">
                     <img
                         src="{{ album.album_photo_two_url }}"
-                        alt="Memory"
-                        class="w-full h-full object-cover"
+                        alt="{{ album.album_photo_two_caption }}"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <span
-                        class="absolute top-4 right-4 bg-black/80 text-white text-xs px-3 py-1 rounded-full border border-white/20 backdrop-blur-md"
+                        class="absolute top-4 right-4 bg-brand-accent/80 text-brand-champagne text-[11px] font-sans font-semibold px-4 py-1.5 rounded-full border border-brand-champagne/20 backdrop-blur-md tracking-wider z-10"
                     >
                         {{ album.album_photo_two_badge_text }}
                     </span>
                 </div>
-                <p class="text-center mt-4 text-gray-400 font-serif text-sm">
-                    {{ album.album_photo_two_caption }}
-                </p>
+                <div class="px-2">
+                    <h4
+                        class="text-xl font-serif text-white text-center mt-5 mb-2 drop-shadow-md"
+                    >
+                        O Momento Especial
+                    </h4>
+                    <p
+                        class="text-center mt-2 text-brand-champagne/80 font-sans text-sm leading-relaxed tracking-wide italic"
+                    >
+                        "{{ album.album_photo_two_caption }}"
+                    </p>
+                </div>
             </div>
 
             <div
-                class="w-64 bg-gray-800 p-4 pb-12 rounded-sm shadow-xl -rotate-6 mt-4 hover:rotate-0 transition duration-300 border border-gray-700"
+                class="w-64 bg-gray-800 p-4 pb-12 rounded-sm shadow-xl -rotate-6 mt-4 hover:rotate-0 hover:scale-105 hover:shadow-2xl transition duration-500 border border-gray-700 group"
             >
-                <div class="w-full h-56 bg-gray-900 overflow-hidden">
+                <div class="overflow-hidden rounded-sm w-full h-56">
                     <img
                         src="{{ album.album_photo_three_url }}"
-                        alt="Memory"
-                        class="w-full h-full object-cover"
+                        alt="{{ album.album_photo_three_caption }}"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                 </div>
-                <p class="text-center mt-4 text-gray-400 font-serif text-sm">
+                <p
+                    class="text-center mt-5 text-gray-400 font-serif text-base leading-snug drop-shadow-sm"
+                >
                     {{ album.album_photo_three_caption }}
                 </p>
             </div>
