@@ -1,42 +1,60 @@
 {% if let Some(timeline) = timeline %}
-<section class="py-24 px-4 bg-[#14151a] relative">
-    <div class="max-w-4xl mx-auto">
-        <h2 class="text-center text-3xl font-serif text-white mb-16">
-            {{ timeline.timeline_section_title }}
-        </h2>
-
-        <div class="relative space-y-16">
+<section class="py-24 px-4 bg-[#14151a] relative overflow-hidden">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-20">
+            <h2
+                class="text-3xl md:text-5xl font-serif text-white tracking-wide drop-shadow-lg"
+            >
+                {{ timeline.timeline_section_title }}
+            </h2>
             <div
-                class="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-gray-700 -translate-x-1/2"
+                class="w-24 h-1 bg-brand-accent mx-auto mt-6 rounded-full opacity-80"
+            ></div>
+        </div>
+
+        <div class="relative">
+            <div
+                class="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-gray-700 to-transparent md:-translate-x-1/2"
             ></div>
 
             {% for event in timeline.timeline_events %}
             <div
-                class="relative flex flex-col md:flex-row items-center justify-between w-full even:md:flex-row-reverse gap-8 md:gap-0"
+                class="relative w-full mb-16 md:mb-32 last:mb-0 flex flex-col md:flex-row justify-between items-center even:md:flex-row-reverse group"
             >
-                <div class="w-full md:w-5/12">
+                <div
+                    class="absolute left-[28px] md:left-1/2 top-[72px] md:top-1/2 w-4 h-4 rounded-full bg-brand-accent shadow-[0_0_15px_rgba(59,130,246,0.6)] transform -translate-x-1/2 md:-translate-y-1/2 z-10 transition-all duration-500 group-hover:scale-150 group-hover:bg-white border-4 border-[#14151a]"
+                ></div>
+
+                <div class="w-full pl-16 md:pl-0 md:w-[42%] mb-8 md:mb-0">
                     <div
-                        class="bg-gray-800/80 border border-gray-700 p-6 rounded-xl shadow-lg"
+                        class="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 p-8 rounded-2xl shadow-xl transition-all duration-500 group-hover:border-brand-accent/50 group-hover:bg-gray-800/70 group-hover:-translate-y-1"
                     >
                         <span
-                            class="text-2xl font-bold text-brand-accent mb-2 block"
+                            class="font-serif text-4xl font-bold text-brand-accent mb-4 block drop-shadow-md"
                         >
                             {{ event.year }}
                         </span>
-                        <p class="text-gray-400">{{ event.description }}</p>
+                        <p
+                            class="text-gray-300 leading-relaxed font-light md:text-lg"
+                        >
+                            {{ event.description }}
+                        </p>
                     </div>
                 </div>
 
-                <div
-                    class="hidden md:block absolute left-1/2 w-4 h-4 rounded-full bg-brand-accent border-4 border-[#14151a] shadow -translate-x-1/2 flex-shrink-0 z-10"
-                ></div>
-
-                <div class="w-full md:w-5/12">
-                    <img
-                        src="{{ event.image_url }}"
-                        alt="Memória de {{ event.year }}"
-                        class="w-full aspect-video md:aspect-[4/3] object-cover rounded-xl shadow-xl border border-gray-700"
-                    />
+                <div class="w-full pl-16 md:pl-0 md:w-[42%]">
+                    <div
+                        class="relative rounded-2xl overflow-hidden border border-gray-700/50 shadow-lg transition-all duration-700 group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.6)]"
+                    >
+                        <div
+                            class="absolute inset-0 bg-[#14151a]/20 group-hover:opacity-0 transition-opacity duration-500 z-10 pointer-events-none"
+                        ></div>
+                        <img
+                            src="{{ event.image_url }}"
+                            alt="Memória de {{ event.year }}"
+                            class="w-full aspect-[4/3] object-cover transform transition-transform duration-700 group-hover:scale-110"
+                        />
+                    </div>
                 </div>
             </div>
             {% endfor %}
