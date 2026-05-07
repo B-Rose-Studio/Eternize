@@ -1,44 +1,112 @@
 {% if let Some(hero) = hero %}
+<style>
+    /* Animação para a foto e o badge */
+    @keyframes heroReveal {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Animação de Ciclo de Fontes (O charme que você pediu) */
+    @keyframes fontCycle {
+        0%,
+        100% {
+            font-family: "Inter", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+            letter-spacing: 0.1em;
+        }
+        33% {
+            font-family: "Playfair Display", serif;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 0.05em;
+        }
+        66% {
+            font-family: "serif";
+            font-weight: 700;
+            font-style: normal;
+            letter-spacing: 0.2em;
+        }
+    }
+
+    .animate-hero {
+        animation: heroReveal 1.2s ease-out forwards;
+    }
+    .animate-badge {
+        animation: heroReveal 1.2s ease-out 0.4s forwards;
+        opacity: 0;
+    }
+
+    .font-cycler {
+        animation: fontCycle 4s infinite;
+        display: inline-block;
+    }
+
+    /* Delay individual para cada item do highlight não mudar ao mesmo tempo */
+    .highlight-item:nth-child(2) .font-cycler {
+        animation-delay: 1.3s;
+    }
+    .highlight-item:nth-child(3) .font-cycler {
+        animation-delay: 2.6s;
+    }
+</style>
+
 <section
     class="min-h-screen flex flex-col items-center justify-center py-20 px-4"
 >
     <div class="max-w-4xl w-full text-center space-y-12">
         <div
-            class="relative w-full h-80 md:h-[500px] rounded-xl overflow-hidden border border-gray-700 shadow-2xl"
+            class="relative w-full h-80 md:h-[540px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-hero"
         >
             <img
                 src="{{ hero.hero_cover_image_url }}"
-                class="w-full h-full object-cover opacity-80"
+                class="w-full h-full object-cover"
+                alt="Helena"
             />
             <div
-                class="absolute inset-0 bg-black/30 flex items-center justify-center"
+                class="absolute inset-0 bg-black/20 flex items-center justify-center"
             >
                 <span
-                    class="px-6 py-2 border-2 border-white rounded-full text-white font-serif tracking-widest text-sm uppercase backdrop-blur-sm"
+                    class="animate-badge px-8 py-3 border border-white/30 rounded-full text-white font-serif tracking-[0.3em] text-xs md:text-sm uppercase backdrop-blur-md bg-white/5"
                 >
                     {{ hero.hero_badge_text }}
                 </span>
             </div>
         </div>
 
-        <div class="space-y-4 max-w-2xl mx-auto">
-            <h1 class="text-4xl md:text-6xl font-serif text-white">
+        <div class="space-y-6 max-w-3xl mx-auto">
+            <h1
+                class="text-5xl md:text-7xl font-serif text-white leading-tight"
+            >
                 {{ hero.hero_main_title }}
             </h1>
-            <div class="w-24 h-1 bg-brand-accent mx-auto rounded-full"></div>
-            <p class="text-lg md:text-xl text-gray-400 font-light">
+            <div class="w-16 h-px bg-brand-accent mx-auto"></div>
+            <p
+                class="text-lg md:text-xl text-gray-400 font-light leading-relaxed"
+            >
                 {{ hero.hero_subtitle_message }}
             </p>
         </div>
 
-        <div class="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto pt-8">
+        <div
+            class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-24 pt-10 border-t border-white/5 w-full max-w-2xl mx-auto"
+        >
             {% for highlight in hero.hero_highlight_items %}
-            <div
-                class="aspect-square bg-gray-800/50 rounded-lg border border-gray-700 flex items-center justify-center p-4 hover:bg-gray-700 transition"
-            >
-                <p class="text-sm md:text-base text-gray-300 text-center">
+            <div class="highlight-item flex flex-col items-center group">
+                <span
+                    class="text-brand-accent text-[10px] tracking-[0.4em] uppercase mb-3 opacity-50 group-hover:opacity-100 transition-opacity"
+                >
+                    Essência
+                </span>
+                <span class="font-cycler text-2xl md:text-3xl text-white">
                     {{ highlight }}
-                </p>
+                </span>
             </div>
             {% endfor %}
         </div>
