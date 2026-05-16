@@ -16,5 +16,6 @@ serde.workspace = true
 serde_json.workspace = true
 short-uuid.workspace = true
 uuid.workspace = true
+wasm-bindgen = "0.2.121"
 worker.workspace = true
 worker-macros.workspace = true

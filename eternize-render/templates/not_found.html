@@ -3,7 +3,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Eternize - Not Found</title>
+        <title>Página Não Encontrada | Eternize</title>
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="https://eternize-storage.bluerosestudio.com.br/main/favicon.ico"
+        />
 
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
@@ -15,25 +20,71 @@
                             serif: ["Playfair Display", "serif"],
                         },
                         colors: {
-                            "brand-dark": "#1A1C23",
-                            "brand-accent": "#B76E79",
-                            "brand-champagne": "#F7E7CE",
+                            "brand-dark": "#0A0A0C",
+                            "brand-surface": "#121318",
+                            "brand-champagne": "#E3D8C6",
                         },
                     },
                 },
             };
         </script>
-
         <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
             rel="stylesheet"
         />
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
     </head>
-
     <body
-        class="bg-brand-dark text-gray-200 font-sans antialiased overflow-x-hidden"
+        class="bg-brand-dark text-gray-300 font-sans antialiased h-screen flex flex-col items-center justify-center relative overflow-hidden selection:bg-brand-champagne selection:text-brand-dark"
     >
-        <h1>Not Found</h1>
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-champagne/5 blur-[120px] rounded-full pointer-events-none"
+        ></div>
+
+        <div class="relative z-10 text-center px-6 max-w-lg mx-auto">
+            <h1
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[12rem] md:text-[18rem] font-serif font-bold text-white/[0.02] pointer-events-none select-none z-0"
+            >
+                404
+            </h1>
+
+            <div class="relative z-10 flex flex-col items-center space-y-6">
+                <div
+                    class="w-20 h-20 rounded-full bg-brand-surface border border-white/10 flex items-center justify-center shadow-xl mb-2"
+                >
+                    <i class="ph ph-wind text-4xl text-brand-champagne"></i>
+                </div>
+
+                <h2
+                    class="text-4xl md:text-5xl font-serif text-white tracking-wide"
+                >
+                    Memória
+                    <span class="italic text-brand-champagne">perdida.</span>
+                </h2>
+
+                <p class="text-gray-400 font-light text-lg leading-relaxed">
+                    Parece que o caminho que você buscou foi levado pelo vento
+                    ou esta história ainda não foi eternizada.
+                </p>
+
+                <div class="pt-8">
+                    <a
+                        href="/"
+                        class="inline-block text-sm font-bold tracking-[0.2em] uppercase text-brand-dark bg-brand-champagne px-10 py-4 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(227,216,198,0.2)]"
+                    >
+                        Voltar ao Início
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-0 w-full text-center z-10">
+            <p
+                class="text-xs text-gray-600 tracking-wider uppercase font-medium"
+            >
+                Um produto
+                <span class="text-brand-champagne">Blue Rose Studio</span>
+            </p>
+        </div>
     </body>
 </html>
